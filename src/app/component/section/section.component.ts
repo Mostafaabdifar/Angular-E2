@@ -6,20 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./section.component.scss']
 })
 export class SectionComponent implements OnInit {
-  temp:number = 2;
-  
+
+  showChild: boolean = false;
+  sectionId : number = 0;
+  template :number[]=[];
+
   constructor() { } 
   
   
   ngOnInit(): void {
   }
 
-  addSection(id:number){
-    let section = document.createElement('section');
-    section.setAttribute('id', `${this.temp}`)
-    section.innerHTML = `<p>section works!</p>
-    <button (click)="addSection(${this.temp})">Click</button>`;
-    document.getElementById(`${id}`)?.appendChild(section);
-    this.temp++;
+  addSection(){
+    this.showChild = true;
+    this.template.push(this.template.length)
+    this.sectionId++;
   }
 }
