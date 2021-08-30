@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-section',
@@ -7,19 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SectionComponent implements OnInit {
 
-  showChild: boolean = false;
-  sectionId : number = 0;
-  template :number[]=[];
+  @Input('name') nodeName: string = "";
+  @Input('id') id:number | undefined;
+   
+  @Output('remove') destroy:EventEmitter<number> = new EventEmitter();
+
+  nodeList:string[] =[];
 
   constructor() { } 
   
   
   ngOnInit(): void {
   }
-
-  addSection(){
-    this.showChild = true;
-    this.template.push(this.template.length)
-    this.sectionId++;
+  
+  addChild(){
+    let name = prompt("Enter Node Name:") || 'UnKnow';
+    this.nodeList.push(name);
   }
-}
+
+  removeNode(index:number){
+    this.nodeList.splice(index,1);
+  }
+
+  destroyNode(){
+    this.destroy.emit(this.id);
+  }
+
+} 

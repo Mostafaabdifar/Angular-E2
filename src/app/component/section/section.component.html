@@ -1,7 +1,9 @@
-<section >
-  <p>section works!</p>
-  <button (click)="addSection()">Click</button>
-  <div *ngIf="showChild">
-    <app-child *ngFor="let section of template" [secId]="section"></app-child>
-  </div>
+<section>
+  <button (click)=destroyNode()>-</button>
+  <code> {{nodeName}} </code>
+  <button (click)="addChild()">+</button>
+  <ul>
+    <app-section *ngFor="let node of nodeList;let i = index" [id]="i" (remove)="removeNode($event)" [name]="node">
+    </app-section>
+  </ul>
 </section>
